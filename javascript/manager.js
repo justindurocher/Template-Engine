@@ -32,97 +32,90 @@ inquirer.prompt([
         name : 'office',
         message: 'What is your office number?'
     }
-  ])
+  ]).then(answers => {
 
-}
+     const html = generateManager(answers);
 
-function generateHTML() {
-    return `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+     function generateManager() {
+        return `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+            
+            <style>
+                .header{
+                    background-color: red;
+                    color: white;
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    font-size: 25px;
+                    text-align: center;
+                }
+                .card-title{
+                    text-align: center;
+                }
+                .card{
+                    border: 2px solid blue;
+                    background-color: wheat;
+                }
         
-        <style>
-            .header{
-                background-color: red;
-                color: white;
-                padding-top: 20px;
-                padding-bottom: 20px;
-                font-size: 25px;
-                text-align: center;
-            }
-            .card-title{
-                text-align: center;
-            }
-            .card{
-                border: 2px solid blue;
-                background-color: wheat;
-            }
-    
-        </style>
-        <title>Coding Staff</title>
-    </head>
-    <body>
-        <div class="container">
-    
-            <div class="row">
-    
-                <div class="col-md-12 header">
-    
-                    My Team
-    
-                </div>
-    
-            </div>
-    
-            <div class="row">
-    
-                <div class="card" style="width: 18rem;">
-    
-                    <div class="card-body">
-    
-                      <h5 class="card-title  cht">Manager</h5>
-    
-                      <div class="card" style="width: 15.5rem;">
-    
-                        <ul class="list-group list-group-flush">
-    
-                          <strong><li class="list-group-item name" style="background-color: whitesmoke;">${answers.name}</li></strong>
-    
-                          <li class="list-group-item id" style="background-color: whitesmoke;">${answers.role}</li>
-    
-                          <li class="list-group-item email" style="background-color: whitesmoke;">${answers.email}</li>
-    
-                          <li class="list-group-item office" style="background-color: whitesmoke;">${answers.office}</li>
-    
-                        </ul>
-    
-                      </div>
-                      
+            </style>
+            <title>Coding Staff</title>
+        </head>
+        <body>
+            <div class="container">
+        
+                <div class="row">
+        
+                    <div class="col-md-12 header">
+        
+                        My Team
+        
                     </div>
-                    
-                  </div>
-    
+        
+                </div>
+        
+                <div class="row">
+        
+                    <div class="card" style="width: 18rem;">
+        
+                        <div class="card-body">
+        
+                          <h5 class="card-title  cht">${answers.role}</h5>
+        
+                          <div class="card" style="width: 15.5rem;">
+        
+                            <ul class="list-group list-group-flush">
+        
+                              <strong><li class="list-group-item name" style="background-color: whitesmoke;">${answers.name}</li></strong>
+        
+                              <li class="list-group-item id" style="background-color: whitesmoke;">${answers.role}</li>
+        
+                              <li class="list-group-item email" style="background-color: whitesmoke;">Email: ${answers.email}</li>
+        
+                              <li class="list-group-item office" style="background-color: whitesmoke;">${answers.office}</li>
+        
+                            </ul>
+        
+                          </div>
+                          
+                        </div>
+                        
+                      </div>
+        
+                </div>
+        
             </div>
-    
-        </div>
-    
-        <script src="./javascript/manager.js"></script>
-    </body>
-    </html>`;
-}
+        
+            <script src="./javascript/manager.js"></script>
+        </body>
+        </html>`;
+    }    
 
-
-   
- promptUser()
- .then(answers => {
-
-     const html = generateHTML(answers);
-
-     return writeFileAsync('index.html', html);
+     return writeFileAsync('../html/manager.html', html);
 
  }).then(function(){
 
@@ -133,4 +126,6 @@ function generateHTML() {
      console.log(err);
 
  });
- 
+}
+
+promptUser();
